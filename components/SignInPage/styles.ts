@@ -5,8 +5,8 @@ import AnchorIcon from "@mui/icons-material/Anchor";
 export const StyledAnchorIcon = styled(AnchorIcon)`
   color: #333333;
   height: auto;
-  margin: 64px 0 80px;
-  width: 136px;
+  margin: 4rem 0 5rem;
+  width: 8.5rem;
 `;
 
 export const StyledTypography = styled(Typography)`
