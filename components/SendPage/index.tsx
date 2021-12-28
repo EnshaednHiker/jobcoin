@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { NavigationBar } from "../NavigationBar";
 
-const SendPage: NextPage = () => {
+export const SendPage: NextPage = () => {
   return (
     <>
       <Head>
@@ -12,9 +13,7 @@ const SendPage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Send page</h1>
+      <NavigationBar />
     </>
   );
 };
-
-export default SendPage;

@@ -1,3 +1,3 @@
-import SendPage from "../../components/SendPage";
+import { SendPage } from "../../components/SendPage";
 
 export default SendPage;

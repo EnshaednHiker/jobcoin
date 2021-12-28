@@ -11,7 +11,7 @@ import {
   Wrapper,
 } from "./styles";
 
-const SignIn: NextPage = () => {
+export const SignInPage: NextPage = () => {
   return (
     <>
       <Head>
@@ -50,5 +50,3 @@ const SignIn: NextPage = () => {
     </>
   );
 };
-
-export default SignIn;

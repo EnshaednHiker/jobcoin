@@ -1,3 +1,3 @@
-import SignInPage from "../components/SignInPage";
+import { SignInPage } from "../components/SignInPage";
 
 export default SignInPage;
