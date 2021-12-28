@@ -3,7 +3,13 @@ import Head from "next/head";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-import { SignInWrapper, StyledForm, StyledTypography, Wrapper } from "./styles";
+import {
+  SignInWrapper,
+  StyledAnchorIcon,
+  StyledForm,
+  StyledTypography,
+  Wrapper,
+} from "./styles";
 
 const SignIn: NextPage = () => {
   return (
@@ -17,6 +23,7 @@ const SignIn: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Wrapper>
+        <StyledAnchorIcon />
         <SignInWrapper>
           <StyledTypography
             // @ts-ignore issue with emotion not picking up the component prop
