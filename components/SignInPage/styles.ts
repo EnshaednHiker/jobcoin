@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import AnchorIcon from "@mui/icons-material/Anchor";
 
+import { BORDER, BORDER_RADIUS } from "../constants";
+
 export const StyledAnchorIcon = styled(AnchorIcon)`
   color: #333333;
   height: auto;
@@ -10,7 +12,7 @@ export const StyledAnchorIcon = styled(AnchorIcon)`
 `;
 
 export const StyledTypography = styled(Typography)`
-  border-bottom: 0.0625rem solid #333333;
+  border-bottom: ${BORDER};
   color: #333333;
   padding: 1.875rem 1rem;
 `;
@@ -22,8 +24,8 @@ export const StyledForm = styled.form`
 `;
 
 export const SignInWrapper = styled.div`
-  border-radius: 0.25rem;
-  border: 0.0625rem solid #333333;
+  border-radius: ${BORDER_RADIUS};
+  border: ${BORDER};
   margin: 0 1rem;
   max-width: 29.375rem;
 `;

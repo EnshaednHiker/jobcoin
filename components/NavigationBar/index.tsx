@@ -9,8 +9,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { StyledLink } from "./StyledLink";
-
-export const NavigationBar = () => {
+import { StyledAccountCircleRoundedIcon, StyledTypography } from "./styles";
+import { NavigationBarProps } from "./types";
+export const NavigationBar = ({ mobileBreakpoint }: NavigationBarProps) => {
   const router = useRouter();
 
   const handleLogoutClick = useCallback(() => {
@@ -23,18 +24,29 @@ export const NavigationBar = () => {
       <AppBar position="static">
         <Toolbar>
           <Link aria-label="home" href="/" passHref>
-            <StyledLink />
+            {/* Wrapped in a div as a hack to silence a ref forwarding error: https://github.com/vercel/next.js/issues/7915 */}
+            <div>
+              <StyledLink />
+            </div>
           </Link>
           {/* TODO: Make Jobcoin Sender dynamic from API call */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="body1" sx={{ flexGrow: 1 }}>
             Jobcoin Sender
           </Typography>
-          <AccountCircleRoundedIcon fontSize="large" sx={{ mr: "1rem" }} />
+          <StyledAccountCircleRoundedIcon
+            fontSize="large"
+            mobilebreakpoint={mobileBreakpoint}
+            sx={{ mr: "0.5rem" }}
+          />
           {/* TODO: add logic looking at whether it's logged in */}
           {/* Added margin bottom because Buttons in MaterialUI are not vertically centered depending on which font you use, https://github.com/mui-org/material-ui/issues/13926 */}
-          <Typography variant="body1" sx={{ mb: "2px", mr: "2rem" }}>
+          <StyledTypography
+            mobilebreakpoint={mobileBreakpoint}
+            sx={{ mb: "0.125rem", mr: "1rem" }}
+            variant="body1"
+          >
             Signed in
-          </Typography>
+          </StyledTypography>
 
           <Button color="inherit" onClick={handleLogoutClick}>
             Logout

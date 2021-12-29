@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import IconButton from "@mui/material/IconButton";
 import AnchorIcon from "@mui/icons-material/Anchor";
 
@@ -7,7 +8,6 @@ export const StyledLink = () => (
     aria-label="home"
     color="inherit"
     edge="start"
-    href="/"
     LinkComponent={"a"}
     size="large"
     sx={{ mr: 2 }}
