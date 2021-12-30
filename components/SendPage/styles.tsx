@@ -21,14 +21,8 @@ export const Column = styled.div`
   display: flex;
   flex-direction: column;
 
-  &:nth-child(2) {
-    margin-left: 0;
-    width: inherits;
-
-    @media screen and (min-width: ${SEND_PAGE_MOBILE_BREAKPOINT}) {
-      margin-left: 3.375rem;
-      width: 100%;
-    }
+  @media screen and (min-width: ${SEND_PAGE_MOBILE_BREAKPOINT}) {
+    margin-right: 3.375rem;
   }
 `;
 
@@ -57,11 +51,4 @@ export const BoxWrapper = styled.div`
     min-width: 18.75rem;
     width: inherit;
   }
-`;
-
-export const HistoryChartWrapper = styled.div`
-  border-radius: ${BORDER_RADIUS};
-  border: ${BORDER};
-  height: 50rem;
-  min-width: 14.75rem;
 `;

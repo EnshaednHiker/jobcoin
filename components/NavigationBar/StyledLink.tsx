@@ -1,9 +1,9 @@
-import { forwardRef } from "react";
+import { FC } from "react";
 import IconButton from "@mui/material/IconButton";
 import AnchorIcon from "@mui/icons-material/Anchor";
 
 // need this abstraction because Next Links can only take one child, not nested children
-export const StyledLink = () => (
+export const StyledLink: FC = () => (
   <IconButton
     aria-label="home"
     color="inherit"

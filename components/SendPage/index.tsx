@@ -4,13 +4,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
+import { HistoryChart } from "../HistoryChart";
 import { NavigationBar } from "../NavigationBar";
 import { SEND_PAGE_MOBILE_BREAKPOINT } from "../constants";
 
 import {
   BoxWrapper,
   Column,
-  HistoryChartWrapper,
   StyledForm,
   StyledTypography,
   Wrapper,
@@ -80,9 +80,8 @@ export const SendPage: NextPage = () => {
             </StyledForm>
           </BoxWrapper>
         </Column>
-        <Column>
-          <HistoryChartWrapper></HistoryChartWrapper>
-        </Column>
+
+        <HistoryChart />
       </Wrapper>
     </>
   );

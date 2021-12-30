@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { StyledLink } from "./StyledLink";
 import { StyledAccountCircleRoundedIcon, StyledTypography } from "./styles";
 import { NavigationBarProps } from "./types";
-export const NavigationBar = ({ mobileBreakpoint }: NavigationBarProps) => {
+export const NavigationBar: FC<NavigationBarProps> = ({ mobileBreakpoint }) => {
   const router = useRouter();
 
   const handleLogoutClick = useCallback(() => {
