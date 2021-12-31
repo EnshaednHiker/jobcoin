@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import escapeHtml from "escape-html";
 
-import { AddressContext } from "../context";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
 import { getAddress } from "../services";
 import { hasEscapedCharacter } from "../utilities";
 
@@ -42,7 +42,7 @@ export const SignInPage: NextPage = () => {
         setError("Address does not exist.");
       } else {
         setError("");
-        setAddressAction(response ?? {});
+        setAddressAction(response ?? DEFAULT_ADDRESS_VALUE);
         push(`/send-page?address=${cleanAddress}`);
       }
     } catch (error) {
