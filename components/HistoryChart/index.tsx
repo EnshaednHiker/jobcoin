@@ -1,66 +1,134 @@
-import { FC } from "react";
+import { FC, useContext, useMemo } from "react";
+import Typography from "@mui/material/Typography";
 import { ResponsiveLine } from "@nivo/line";
+import { useRouter } from "next/router";
+import { format } from "date-fns";
+
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
 
 import { CustomSymbol } from "./CustomSymbol";
-import { HistoryChartWrapper } from "./styles";
+import { HistoryChartWrapper, Wrapper } from "./styles";
 
 export const HistoryChart: FC = () => {
+  const { address } = useContext(AddressContext);
+  const { query } = useRouter();
+  const addressName = query?.address?.toString();
+
+  const data = useMemo(() => {
+    const { transactions } = address;
+
+    if (transactions.length === 0 || addressName === undefined) {
+      return undefined;
+    }
+
+    let initialAmount = parseInt(address.transactions[0].amount, 10);
+
+    const dataPoints = transactions.map((transaction, index) => {
+      const { amount, toAddress } = transaction;
+      const amountNumber = parseInt(amount, 10);
+
+      const position = index + 1;
+      // the first transaction is always the initial amount
+      if (index === 0) {
+        return { x: position, y: initialAmount };
+      } else if (toAddress === addressName && index > 0) {
+        initialAmount = initialAmount + amountNumber;
+        return { x: position, y: initialAmount };
+      } else {
+        initialAmount = initialAmount - amountNumber;
+        return { x: position, y: initialAmount };
+      }
+    });
+
+    return dataPoints;
+  }, [address, addressName]);
+
+  if (data === undefined) {
+    return (
+      <Typography
+        component="h2"
+        textAlign="center"
+        sx={{ mt: "2rem", color: "#333333" }}
+        variant="h5"
+      >
+        No Jobcoin Transaction History
+      </Typography>
+    );
+  }
+
   return (
-    <HistoryChartWrapper>
-      <ResponsiveLine
-        margin={{ top: 50, right: 40, bottom: 60, left: 50 }}
-        animate
-        enableSlices={false}
-        data={[
-          {
-            id: "Jobcoin owner",
-            data: [
-              { x: "2018-01-01", y: 7 },
-              { x: "2018-01-02", y: 5 },
-              { x: "2018-01-03", y: 11 },
-              { x: "2018-01-04", y: 9 },
-              { x: "2018-01-05", y: 12 },
-              { x: "2018-01-06", y: 16 },
-              { x: "2018-01-07", y: 13 },
-              { x: "2018-01-08", y: 13 },
-            ],
-          },
-        ]}
-        xScale={{
-          type: "time",
-          format: "%Y-%m-%d",
-          useUTC: false,
-          precision: "day",
-        }}
-        xFormat="time:%Y-%m-%d"
-        yFormat={(value) => `${value} coins`}
-        yScale={{
-          type: "linear",
-          stacked: false,
-        }}
-        axisLeft={{
-          legend: "Jobcoin total",
-          legendOffset: -30,
-        }}
-        axisBottom={{
-          format: "%b %d",
-          tickValues: "every 2 days",
-          legend: "time scale",
-          legendOffset: 30,
-        }}
-        curve="linear"
-        enablePointLabel={true}
-        pointSymbol={CustomSymbol}
-        pointSize={16}
-        pointLabelYOffset={-12}
-        pointBorderWidth={1}
-        pointBorderColor={{
-          from: "color",
-          modifiers: [["darker", 0.3]],
-        }}
-        useMesh={true}
-        motionConfig="stiff"
-      />
-    </HistoryChartWrapper>
+    <Wrapper>
+      <Typography
+        component="h2"
+        textAlign="center"
+        sx={{ mt: "2rem", color: "#333333" }}
+        variant="h5"
+      >
+        Jobcoin Transaction History
+      </Typography>
+      <HistoryChartWrapper>
+        <ResponsiveLine
+          margin={{ top: 50, right: 40, bottom: 60, left: 50 }}
+          animate
+          enableSlices={false}
+          data={[
+            {
+              id: "Jobcoin owner",
+              data,
+            },
+          ]}
+          xScale={{ type: "point" }}
+          xFormat={(value) => {
+            const transaction =
+              address.transactions[parseInt(value.toString(), 10) - 1];
+            const { timestamp, toAddress, fromAddress, amount } = transaction;
+
+            const date = new Date(timestamp);
+
+            const formattedDate = format(date, "P p");
+
+            const xFormatValue = `${value.toString()}: ${toAddress} received ${amount} coins on ${formattedDate}`;
+            if (fromAddress) {
+              return `${xFormatValue} from ${fromAddress}`;
+            }
+
+            return xFormatValue;
+          }}
+          yFormat={(value) => `${value} coins`}
+          yScale={{
+            min: "auto",
+            max: "auto",
+            type: "linear",
+            stacked: false,
+          }}
+          axisLeft={{
+            legend: "Jobcoin total",
+            legendOffset: -40,
+          }}
+          axisBottom={{
+            tickSize: 5,
+            legend: "Transactions",
+            legendOffset: 30,
+          }}
+          curve="stepAfter"
+          enablePointLabel={true}
+          pointSymbol={CustomSymbol}
+          pointSize={16}
+          pointLabelYOffset={-12}
+          pointBorderWidth={1}
+          pointBorderColor={{
+            from: "color",
+            modifiers: [["darker", 0.3]],
+          }}
+          // TODO: make a custom tooltip that does not obscure info when hovering on the edges of the screen
+          // tooltip={(props) => {
+          //   console.log("props", props);
+          //   return <div>foo</div>;
+          // }}
+          useMesh={true}
+          motionConfig="stiff"
+        />
+      </HistoryChartWrapper>
+    </Wrapper>
   );
 };

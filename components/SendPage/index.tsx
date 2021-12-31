@@ -1,3 +1,4 @@
+import { useContext, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Typography from "@mui/material/Typography";
@@ -7,6 +8,9 @@ import TextField from "@mui/material/TextField";
 import { HistoryChart } from "../HistoryChart";
 import { NavigationBar } from "../NavigationBar";
 import { SEND_PAGE_MOBILE_BREAKPOINT } from "../constants";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
+import { getAddress } from "../services";
+import { AddressResponse } from "../types";
 
 import {
   BoxWrapper,
@@ -16,7 +20,21 @@ import {
   Wrapper,
 } from "./styles";
 
-export const SendPage: NextPage = () => {
+export const SendPage: NextPage<AddressResponse> = (props) => {
+  const { address, setAddress } = useContext(AddressContext);
+
+  useEffect(() => {
+    const { balance, transactions } = props;
+    if (balance && balance !== "0" && (transactions?.length ?? 0) > 0) {
+      setAddress({
+        balance,
+        transactions,
+      });
+    }
+    // we only want this to run one time to avoid an infinite rerender loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Head>
@@ -27,7 +45,7 @@ export const SendPage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavigationBar mobileBreakpoint={SEND_PAGE_MOBILE_BREAKPOINT} />
+      <NavigationBar />
       <Wrapper>
         <Column>
           <BoxWrapper>
@@ -45,8 +63,7 @@ export const SendPage: NextPage = () => {
               sx={{ m: "55px" }}
               variant="h5"
             >
-              {/* TODO: add dynamic balance amount from API */}
-              230.12
+              {address.balance ?? "0"}
             </Typography>
           </BoxWrapper>
           <BoxWrapper>
@@ -85,4 +102,14 @@ export const SendPage: NextPage = () => {
       </Wrapper>
     </>
   );
+};
+
+SendPage.getInitialProps = async (ctx) => {
+  // if ctx.req, then it's server side
+  if (ctx.query?.address && ctx.req) {
+    const address = await getAddress(ctx.query?.address?.toString());
+    return address ?? DEFAULT_ADDRESS_VALUE;
+  }
+
+  return DEFAULT_ADDRESS_VALUE;
 };

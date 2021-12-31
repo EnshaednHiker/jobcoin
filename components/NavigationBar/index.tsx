@@ -1,4 +1,4 @@
-import { FC, useCallback } from "react";
+import { FC, useCallback, useContext, useMemo } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,16 +7,25 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
 import { StyledLink } from "./StyledLink";
 import { StyledAccountCircleRoundedIcon, StyledTypography } from "./styles";
-import { NavigationBarProps } from "./types";
-export const NavigationBar: FC<NavigationBarProps> = ({ mobileBreakpoint }) => {
+
+const MOBILE_BREAKPOINT = "31.25rem";
+export const NavigationBar: FC = () => {
   const router = useRouter();
+  const value = useContext(AddressContext);
+
+  const addressName = useMemo(() => {
+    return value.address?.transactions[0]
+      ? value.address.transactions[0].toAddress
+      : "";
+  }, [value]);
 
   const handleLogoutClick = useCallback(() => {
     router.push("/");
-    // TODO: execute logout logic
-  }, [router]);
+    value.setAddress(DEFAULT_ADDRESS_VALUE);
+  }, [router, value]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -28,19 +37,18 @@ export const NavigationBar: FC<NavigationBarProps> = ({ mobileBreakpoint }) => {
               <StyledLink />
             </div>
           </Link>
-          {/* TODO: Make Jobcoin Sender dynamic from API call */}
           <Typography variant="body1" sx={{ flexGrow: 1 }}>
-            Jobcoin Sender
+            {addressName}
           </Typography>
           <StyledAccountCircleRoundedIcon
             fontSize="large"
-            mobilebreakpoint={mobileBreakpoint}
+            mobilebreakpoint={MOBILE_BREAKPOINT}
             sx={{ mr: "0.5rem" }}
           />
           {/* TODO: add logic looking at whether it's logged in */}
           {/* Added margin bottom because Buttons in MaterialUI are not vertically centered depending on which font you use, https://github.com/mui-org/material-ui/issues/13926 */}
           <StyledTypography
-            mobilebreakpoint={mobileBreakpoint}
+            mobilebreakpoint={MOBILE_BREAKPOINT}
             sx={{ mb: "0.125rem", mr: "1rem" }}
             variant="body1"
           >

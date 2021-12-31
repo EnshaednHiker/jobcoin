@@ -2,6 +2,7 @@ import {
   ChangeEventHandler,
   KeyboardEventHandler,
   useCallback,
+  useContext,
   useState,
 } from "react";
 import type { NextPage } from "next";
@@ -11,6 +12,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import escapeHtml from "escape-html";
 
+import { AddressContext } from "../context";
 import { getAddress } from "../services";
 import { hasEscapedCharacter } from "../utilities";
 
@@ -27,12 +29,12 @@ export const SignInPage: NextPage = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const { push } = router;
+  const { setAddress: setAddressAction } = useContext(AddressContext);
 
   const signInOnClickHandler = useCallback(async () => {
     try {
       // we need to protect against XSS attacks by stripping out characters that can make html tags
       const cleanAddress = escapeHtml(address.trim());
-      console.log("cleanedAddress", cleanAddress);
 
       const response = await getAddress(cleanAddress);
 
@@ -40,13 +42,14 @@ export const SignInPage: NextPage = () => {
         setError("Address does not exist.");
       } else {
         setError("");
+        setAddressAction(response ?? {});
         push(`/send-page?address=${cleanAddress}`);
       }
     } catch (error) {
-      console.log("error", error);
+      console.error(error);
       setError("Something went wrong. Please try again.");
     }
-  }, [address, push]);
+  }, [address, push, setAddressAction]);
 
   const onChangeHandler = useCallback<
     ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>

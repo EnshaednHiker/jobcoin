@@ -15,6 +15,7 @@
     "@mui/material": "^5.2.6",
     "@nivo/core": "^0.76.0",
     "@nivo/line": "^0.76.0",
+    "date-fns": "^2.28.0",
     "escape-html": "^1.0.3",
     "ky": "^0.28.7",
     "ky-universal": "^0.9.1",
