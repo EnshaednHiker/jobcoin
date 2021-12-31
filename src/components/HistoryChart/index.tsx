@@ -4,7 +4,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
 
-import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
+import { AddressContext } from "../../context";
 
 import { CustomSymbol } from "./CustomSymbol";
 import { HistoryChartWrapper, Wrapper } from "./styles";
@@ -67,6 +67,7 @@ export const HistoryChart: FC = () => {
         Jobcoin Transaction History
       </Typography>
       <HistoryChartWrapper>
+        {/* TODO: add pagination for larger transaction sets */}
         <ResponsiveLine
           margin={{ top: 50, right: 40, bottom: 60, left: 50 }}
           animate

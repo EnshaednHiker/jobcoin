@@ -5,12 +5,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-import { HistoryChart } from "../HistoryChart";
-import { NavigationBar } from "../NavigationBar";
-import { SEND_PAGE_MOBILE_BREAKPOINT } from "../constants";
-import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
-import { getAddress } from "../services";
-import { AddressResponse } from "../types";
+import { HistoryChart } from "../../components/HistoryChart";
+import { NavigationBar } from "../../components/NavigationBar";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
+import { getAddress } from "../../services";
+import { AddressResponse } from "../../types";
 
 import {
   BoxWrapper,

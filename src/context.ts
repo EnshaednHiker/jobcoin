@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 
-import { AddressResponse } from "../components/types";
+import { AddressResponse } from "./types";
 
 export const DEFAULT_ADDRESS_VALUE = {
   balance: "0",

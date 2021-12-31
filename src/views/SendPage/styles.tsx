@@ -1,11 +1,9 @@
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 
-import {
-  BORDER,
-  BORDER_RADIUS,
-  SEND_PAGE_MOBILE_BREAKPOINT,
-} from "../constants";
+import { BORDER, BORDER_RADIUS } from "../../constants";
+
+const SEND_PAGE_MOBILE_BREAKPOINT = "45.375rem";
 
 export const Wrapper = styled.div`
   display: flex;
