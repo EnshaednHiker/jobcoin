@@ -1,11 +1,9 @@
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 
-import {
-  BORDER,
-  BORDER_RADIUS,
-  SEND_PAGE_MOBILE_BREAKPOINT,
-} from "../constants";
+import { BORDER, BORDER_RADIUS } from "../../constants";
+
+const SEND_PAGE_MOBILE_BREAKPOINT = "45.375rem";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -30,12 +28,6 @@ export const StyledTypography = styled(Typography)`
   border-bottom: ${BORDER};
   color: #333333;
   padding: 1.875rem 1rem;
-`;
-
-export const StyledForm = styled.form`
-  margin: 2.375rem auto 3rem;
-  padding: 0 1rem;
-  max-width: 18.75rem;
 `;
 
 export const BoxWrapper = styled.div`
