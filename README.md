@@ -27,8 +27,28 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## About this project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project was built to be totally SSRed. It uses:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js](https://nextjs.org/)
+- [Nivo](https://nivo.rocks/line/) for the line chart, it can be SSRed
+- [ky universal](https://github.com/sindresorhus/ky-universal) for requests as it can be used in Node environments, and therefore can be SSRed
+- [Material UI](https://mui.com/getting-started/usage/) for some off the shelf battle-tested foundational componentry
+- [Self hosted fonts](https://www.npmjs.com/package/@fontsource/roboto) for the faster paint render times than if it had been CDNed
+- [normalize.css](https://necolas.github.io/normalize.css/) to get rid of the styling wonkiness between browsers
+- [Emotion](https://emotion.sh/docs/introduction) as the CSS-in-JS solution since you folks use it and I never had before.
+
+For testing, I'm using:
+
+- [react testing library](https://testing-library.com/docs/react-testing-library/intro/) as the unit testing library
+- [jest](https://jestjs.io/) as the test runner
+
+I wish I'd:
+
+- Just used [react-hook-form](https://react-hook-form.com/) for the form state logic. Form state is always trickier than you think it'll be
+- Used more of the layout helpers in Material UI. I could have sped up development more if I'd leaned into that
+- Had time to build a custom tooltip in the Nivo ResponsiveLine chart. The data points are not useable near the edges of the screen
+- Added pagination to the line chart so that addresses with a higher number of transactions don't get squished
+- Added [cypress](https://docs.cypress.io/guides/getting-started/installing-cypress) for functional testing in the app, in a perfect world.
+- Picked a different library for handling the API the requests. I feel like the way I used it with the post endpoint is an anti-pattern with the library. It has hooks that let you do things on completion of the request for mutations, but it was really hard to make that reusable for the services I made. Maybe I could have found a better way to make more logic reusable for elsewhere, but it was tricky. Maybe another fetch library could have worked better.

@@ -122,6 +122,8 @@ export const HistoryChart: FC = () => {
             modifiers: [["darker", 0.3]],
           }}
           // TODO: make a custom tooltip that does not obscure info when hovering on the edges of the screen
+          // https://github.com/plouc/nivo/tree/master/packages/tooltip/src
+          // https://www.npmjs.com/package/@nivo/tooltip
           // tooltip={(props) => {
           //   console.log("props", props);
           //   return <div>foo</div>;
