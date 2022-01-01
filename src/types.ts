@@ -12,7 +12,12 @@ export interface Transaction {
   toAddress: string;
 }
 
-export interface AddressResponse {
+export interface GetAddressResponse {
   balance: string;
   transactions: Transaction[];
+}
+
+export interface PostSendCoinResponse {
+  status?: "OK";
+  error?: "Insufficient Funds";
 }
