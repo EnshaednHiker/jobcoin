@@ -10,13 +10,17 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the sign in page.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Open [http://localhost:3000/send-page?address={address}](http://localhost:3000/send-page?address={address}) to the send page where you can send jobcoins, see your balance, and see your transaction history
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Run tests with:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run test
+# or
+yarn test
+```
 
 ## Learn More
 
@@ -29,15 +33,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## About this project
 
-This project was built to be totally SSRed. It uses:
+This project was built to be totally server side rendered (SSR). It uses:
 
-- [Next.js](https://nextjs.org/)
+- [Next.js with create-next-app](https://nextjs.org/docs/api-reference/create-next-app) for really quick bootstrapper for a NextJs project. Using NextJS of course to make the app server side rendered.
 - [Nivo](https://nivo.rocks/line/) for the line chart, it can be SSRed
 - [ky universal](https://github.com/sindresorhus/ky-universal) for requests as it can be used in Node environments, and therefore can be SSRed
 - [Material UI](https://mui.com/getting-started/usage/) for some off the shelf battle-tested foundational componentry
 - [Self hosted fonts](https://www.npmjs.com/package/@fontsource/roboto) for the faster paint render times than if it had been CDNed
 - [normalize.css](https://necolas.github.io/normalize.css/) to get rid of the styling wonkiness between browsers
 - [Emotion](https://emotion.sh/docs/introduction) as the CSS-in-JS solution since you folks use it and I never had before.
+- [prettier](https://prettier.io/docs/en/install.html) because that plus fixing on save is a huge productivity boost
 
 For testing, I'm using:
 
