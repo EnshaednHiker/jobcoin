@@ -2,34 +2,46 @@ import { useContext, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/router";
+import escapeHtml from "escape-html";
 
 import { HistoryChart } from "../../components/HistoryChart";
 import { NavigationBar } from "../../components/NavigationBar";
 import { SendCoinsForm } from "../../components/SendCoinsForm";
 
 import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
-import { getAddress } from "../../services";
+import { doesAddressExist, getAddress } from "../../services";
 import { GetAddressResponse } from "../../types";
 
 import { BoxWrapper, Column, StyledTypography, Wrapper } from "./styles";
 
 export const SendPage: NextPage<GetAddressResponse> = (props) => {
   const { address, setAddress } = useContext(AddressContext);
-
+  const { query } = useRouter();
+  const addressName = query?.address?.toString();
   useEffect(() => {
     const { balance, transactions } = props;
 
     // we don't want to set the default value into context state if it's already there
     // this prevents unnecessary rerenders since the object will be a new reference even if it has the same values
-    if (balance && balance !== "0" && (transactions?.length ?? 0) > 0) {
+    if (doesAddressExist({ balance, transactions })) {
       setAddress({
         balance,
         transactions,
       });
+    } else if (
+      (!doesAddressExist({ balance, transactions }) && addressName?.length) ??
+      0 > 0
+    ) {
+      const fetchAddress = async () =>
+        await getAddress(escapeHtml(addressName?.trim()));
+      fetchAddress().then((response) => {
+        setAddress(response ?? DEFAULT_ADDRESS_VALUE);
+      });
     }
     // we only want this to run one time to avoid an infinite rerender loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [addressName]);
 
   return (
     <>
@@ -83,7 +95,9 @@ export const SendPage: NextPage<GetAddressResponse> = (props) => {
 SendPage.getInitialProps = async (ctx) => {
   // if ctx.req, then it's server side
   if (ctx.query?.address && ctx.req) {
-    const address = await getAddress(ctx.query?.address?.toString());
+    const address = await getAddress(
+      escapeHtml(ctx.query?.address?.toString().trim())
+    );
     return address ?? DEFAULT_ADDRESS_VALUE;
   }
 

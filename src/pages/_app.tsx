@@ -7,9 +7,9 @@ import "@fontsource/roboto/700.css";
 import "normalize.css";
 
 import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../context";
-import { AddressResponse } from "../types";
+import { GetAddressResponse } from "../types";
 function MyApp({ Component, pageProps }: AppProps) {
-  const [address, setAddress] = useState<AddressResponse>(
+  const [address, setAddress] = useState<GetAddressResponse>(
     DEFAULT_ADDRESS_VALUE
   );
 

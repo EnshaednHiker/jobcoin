@@ -24,6 +24,14 @@ import {
   Wrapper,
 } from "./styles";
 
+const SCOPE = "@jobcoin/views/SignInPage";
+
+export const SIGN_IN_PAGE_TEST_IDS = {
+  HEADING: `${SCOPE}/Heading`,
+  ADDRESS_TEXT_FIELD: `${SCOPE}/AddressTextField`,
+  SIGN_IN_BUTTON: `${SCOPE}/SignInButton`,
+} as const;
+
 export const SignInPage: NextPage = () => {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
@@ -38,7 +46,7 @@ export const SignInPage: NextPage = () => {
 
       const response = await getAddress(cleanAddress);
 
-      if (doesAddressExist(response ?? DEFAULT_ADDRESS_VALUE)) {
+      if (!doesAddressExist(response ?? DEFAULT_ADDRESS_VALUE)) {
         setError("Address does not exist.");
       } else {
         setError("");
@@ -91,6 +99,7 @@ export const SignInPage: NextPage = () => {
           <StyledTypography
             // @ts-ignore issue with emotion not picking up the component prop
             component="h1"
+            data-testid={SIGN_IN_PAGE_TEST_IDS.HEADING}
             textAlign="center"
             variant="h5"
           >
@@ -98,6 +107,7 @@ export const SignInPage: NextPage = () => {
           </StyledTypography>
           <StyledForm>
             <TextField
+              data-testid={SIGN_IN_PAGE_TEST_IDS.ADDRESS_TEXT_FIELD}
               error={error.length > 0}
               fullWidth
               helperText={error}
@@ -111,6 +121,7 @@ export const SignInPage: NextPage = () => {
               variant="outlined"
             />
             <Button
+              data-testid={SIGN_IN_PAGE_TEST_IDS.SIGN_IN_BUTTON}
               disabled={address.length < 1 || hasEscapedCharacter(address)}
               fullWidth
               onClick={signInOnClickHandler}
