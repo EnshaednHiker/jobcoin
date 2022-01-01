@@ -30,12 +30,6 @@ export const StyledTypography = styled(Typography)`
   padding: 1.875rem 1rem;
 `;
 
-export const StyledForm = styled.form`
-  margin: 2.375rem auto 3rem;
-  padding: 0 1rem;
-  max-width: 18.75rem;
-`;
-
 export const BoxWrapper = styled.div`
   border-radius: ${BORDER_RADIUS};
   border: ${BORDER};

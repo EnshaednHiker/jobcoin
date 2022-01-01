@@ -13,7 +13,7 @@ import TextField from "@mui/material/TextField";
 import escapeHtml from "escape-html";
 
 import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
-import { getAddress } from "../../services";
+import { doesAddressExist, getAddress } from "../../services";
 import { hasEscapedCharacter } from "../../utilities";
 
 import {
@@ -38,7 +38,7 @@ export const SignInPage: NextPage = () => {
 
       const response = await getAddress(cleanAddress);
 
-      if (response?.balance === "0" && response?.transactions?.length === 0) {
+      if (doesAddressExist(response ?? DEFAULT_ADDRESS_VALUE)) {
         setError("Address does not exist.");
       } else {
         setError("");

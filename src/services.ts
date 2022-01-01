@@ -32,3 +32,6 @@ export const postSendCoinsToAddress = async ({
     })
     .json();
 };
+
+export const doesAddressExist = (address: GetAddressResponse) =>
+  address.balance !== "0" && address.transactions.length > 0;
