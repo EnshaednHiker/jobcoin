@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "test-utils";
+import { render, screen } from "test-utils";
+import userEvent from "@testing-library/user-event";
 
 import { SignInPage, SIGN_IN_PAGE_TEST_IDS } from "..";
 
@@ -28,14 +29,17 @@ describe("SignInPage", () => {
   it("should enable the sign in button with text in the TextField", async () => {
     render(<SignInPage />);
 
-    const addressTextField = await screen.findByTestId(
-      SIGN_IN_PAGE_TEST_IDS.ADDRESS_TEXT_FIELD
-    );
+    const addressTextField = await screen.findByRole("textbox");
 
-    // fireEvent(addressTextField, "typ");
+    userEvent.type(addressTextField, "Bob");
 
     expect(
       await screen.findByTestId(SIGN_IN_PAGE_TEST_IDS.SIGN_IN_BUTTON)
-    ).toHaveAttribute("disabled", "false");
+    ).not.toHaveAttribute("disabled", "");
   });
+
+  // given more time, I would implement a way to mock out my API calls. Without that functionality, I cannot test the rest of these test cases
+  it("should route to send-page on click of sign in button with valid address", async () => {});
+
+  it("should not route to send-page on click of sign in button with invalid address", async () => {});
 });
