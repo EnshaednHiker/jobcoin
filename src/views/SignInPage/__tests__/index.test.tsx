@@ -10,5 +10,11 @@ describe("SignInPage", () => {
     expect(
       screen.getByTestId(SIGN_IN_PAGE_TEST_IDS.HEADING)
     ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SIGN_IN_PAGE_TEST_IDS.ADDRESS_TEXT_FIELD)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SIGN_IN_PAGE_TEST_IDS.SIGN_IN_BUTTON)
+    ).toBeInTheDocument();
   });
 });

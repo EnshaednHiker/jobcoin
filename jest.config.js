@@ -1,6 +1,7 @@
 module.exports = {
   collectCoverageFrom: [
-    "**/*.{js,jsx,ts,tsx}",
+    // Only gather test coverage for files within the src folder
+    "**/src/**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
@@ -16,7 +17,7 @@ module.exports = {
     // https://jestjs.io/docs/webpack#handling-static-assets
     "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$": `<rootDir>/__mocks__/fileMock.js`,
 
-    // Handle module aliases
+    // Handle module aliases if any get added to project
     // "^@/components/(.*)$": "<rootDir>/components/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
@@ -28,18 +29,7 @@ module.exports = {
     "^.+\\.(js|jsx|ts|tsx)$": [
       "babel-jest",
       {
-        presets: [
-          [
-            "next/babel",
-            // ,
-            // {
-            //   "preset-typescript": true,
-            //   "preset-env": true,
-            //   "preset-react": true,
-            //   "transform-runtime": true,
-            // },
-          ],
-        ],
+        presets: [["next/babel"]],
       },
     ],
   },
