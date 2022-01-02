@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 
-import { BORDER, BORDER_RADIUS } from "../../constants";
+import { BORDER, BORDER_RADIUS } from "constants/styles";
 
 const SEND_PAGE_MOBILE_BREAKPOINT = "45.375rem";
 

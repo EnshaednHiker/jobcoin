@@ -4,10 +4,16 @@ import { ResponsiveLine } from "@nivo/line";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
 
-import { AddressContext } from "../../context";
+import { AddressContext } from "context";
 
 import { CustomSymbol } from "./CustomSymbol";
 import { HistoryChartWrapper, Wrapper } from "./styles";
+
+const SCOPE = "@jobcoin/components/HistoryChart";
+
+export const HISTORY_CHART_TEST_IDS = {
+  CHART: `${SCOPE}/Chart`,
+} as const;
 
 export const HistoryChart: FC = () => {
   const { address } = useContext(AddressContext);
@@ -57,7 +63,7 @@ export const HistoryChart: FC = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper data-testid={HISTORY_CHART_TEST_IDS.CHART}>
       <Typography
         component="h2"
         textAlign="center"
@@ -122,6 +128,8 @@ export const HistoryChart: FC = () => {
             modifiers: [["darker", 0.3]],
           }}
           // TODO: make a custom tooltip that does not obscure info when hovering on the edges of the screen
+          // https://github.com/plouc/nivo/tree/master/packages/tooltip/src
+          // https://www.npmjs.com/package/@nivo/tooltip
           // tooltip={(props) => {
           //   console.log("props", props);
           //   return <div>foo</div>;

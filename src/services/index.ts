@@ -1,7 +1,6 @@
 import ky from "ky-universal";
 
-import { DEFAULT_ADDRESS_VALUE } from "./context";
-import { GetAddressResponse, PostSendCoinResponse } from "./types";
+import { GetAddressResponse, PostSendCoinResponse } from "types";
 export const getAddress = async (
   address: string
 ): Promise<GetAddressResponse | undefined> =>
