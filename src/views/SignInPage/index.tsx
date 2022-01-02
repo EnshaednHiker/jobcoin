@@ -73,11 +73,13 @@ export const SignInPage: NextPage = () => {
 
   const onKeypressHandler = useCallback<KeyboardEventHandler<HTMLDivElement>>(
     (event) => {
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && address.length > 0) {
         event.preventDefault();
         if (!hasEscapedCharacter(address)) {
           signInOnClickHandler();
         }
+      } else if (event.key === "Enter" && address.length === 0) {
+        setError("Must enter at least one character.");
       }
     },
     [address, signInOnClickHandler]
