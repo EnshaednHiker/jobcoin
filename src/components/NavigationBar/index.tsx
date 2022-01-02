@@ -18,6 +18,7 @@ const SCOPE = "@jobcoin/components/NavigationBar";
 export const NAVIGATION_BAR_TEST_IDS = {
   SIGN_OUT_BUTTON: `${SCOPE}/SignOutButton`,
 } as const;
+
 export const NavigationBar: FC = () => {
   const router = useRouter();
   const value = useContext(AddressContext);

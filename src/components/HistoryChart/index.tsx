@@ -9,6 +9,12 @@ import { AddressContext } from "context";
 import { CustomSymbol } from "./CustomSymbol";
 import { HistoryChartWrapper, Wrapper } from "./styles";
 
+const SCOPE = "@jobcoin/components/HistoryChart";
+
+export const HISTORY_CHART_TEST_IDS = {
+  CHART: `${SCOPE}/CHART`,
+} as const;
+
 export const HistoryChart: FC = () => {
   const { address } = useContext(AddressContext);
   const { query } = useRouter();
@@ -57,7 +63,7 @@ export const HistoryChart: FC = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper data-testid={HISTORY_CHART_TEST_IDS.CHART}>
       <Typography
         component="h2"
         textAlign="center"
