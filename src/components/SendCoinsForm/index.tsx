@@ -19,6 +19,12 @@ import { hasEscapedCharacter, isNumberString } from "utilities";
 
 import { StyledForm } from "./styles";
 
+const SCOPE = "@jobcoin/components/SendCoinsForm";
+
+export const SEND_COINS_FORM_TEST_IDS = {
+  FORM: `${SCOPE}/Form`,
+} as const;
+
 export const SendCoinsForm: FC = () => {
   const [destinationAddress, setDestinationAddress] = useState("");
   const [destinationAddressError, setDestinationAddressError] = useState("");
@@ -27,12 +33,18 @@ export const SendCoinsForm: FC = () => {
   const [amountToSend, setAmountToSend] = useState("");
   const [amountToSendError, setAmountToSendError] = useState("");
 
-  const { setAddress } = useContext(AddressContext);
+  const { address, setAddress } = useContext(AddressContext);
   const router = useRouter();
+
+  const fromAddress = router.query?.address?.toString().trim() ?? "";
+
+  const isLoggedIn = useMemo(
+    () => fromAddress.length > 0 && address.transactions.length > 0,
+    [fromAddress, address.transactions]
+  );
 
   const sendJobcoinsOnClickHandler = useCallback(async () => {
     try {
-      const fromAddress = router.query?.address?.toString().trim() ?? "";
       // we need to protect against XSS attacks by stripping out characters that can make html tags
       const cleanDestinationAddress = escapeHtml(destinationAddress.trim());
 
@@ -70,7 +82,13 @@ export const SendCoinsForm: FC = () => {
         setSendCoinsError("Something went wrong. Please try again.");
       }
     }
-  }, [amountToSend, destinationAddress, router.query?.address, setAddress]);
+  }, [
+    amountToSend,
+    destinationAddress,
+    router.query?.address,
+    setAddress,
+    fromAddress,
+  ]);
 
   const destinationAddressOnChangeHandler = useCallback<
     ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>
@@ -126,8 +144,12 @@ export const SendCoinsForm: FC = () => {
     [isDisabled, sendJobcoinsOnClickHandler]
   );
 
+  if (!isLoggedIn) {
+    return null;
+  }
+
   return (
-    <StyledForm>
+    <StyledForm data-testid={SEND_COINS_FORM_TEST_IDS.FORM}>
       <TextField
         error={destinationAddressError.length > 0}
         fullWidth
@@ -160,6 +182,7 @@ export const SendCoinsForm: FC = () => {
         fullWidth
         onClick={sendJobcoinsOnClickHandler}
         sx={{ mt: "1.5rem" }}
+        type="button"
         variant="contained"
       >
         Send Jobcoins
