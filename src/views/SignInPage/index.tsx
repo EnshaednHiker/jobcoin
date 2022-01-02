@@ -12,9 +12,9 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import escapeHtml from "escape-html";
 
-import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
-import { doesAddressExist, getAddress } from "../../services";
-import { hasEscapedCharacter } from "../../utilities";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "context";
+import { doesAddressExist, getAddress } from "services";
+import { hasEscapedCharacter } from "utilities";
 
 import {
   SignInWrapper,

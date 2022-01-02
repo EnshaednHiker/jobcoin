@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import AnchorIcon from "@mui/icons-material/Anchor";
 
-import { BORDER, BORDER_RADIUS } from "../../constants";
+import { BORDER, BORDER_RADIUS } from "constants/styles";
 
 export const StyledAnchorIcon = styled(AnchorIcon)`
   color: #333333;

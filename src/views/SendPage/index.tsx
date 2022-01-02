@@ -5,13 +5,13 @@ import Typography from "@mui/material/Typography";
 import { useRouter } from "next/router";
 import escapeHtml from "escape-html";
 
-import { HistoryChart } from "../../components/HistoryChart";
-import { NavigationBar } from "../../components/NavigationBar";
-import { SendCoinsForm } from "../../components/SendCoinsForm";
+import { HistoryChart } from "components/HistoryChart";
+import { NavigationBar } from "components/NavigationBar";
+import { SendCoinsForm } from "components/SendCoinsForm";
 
-import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
-import { doesAddressExist, getAddress } from "../../services";
-import { GetAddressResponse } from "../../types";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "context";
+import { doesAddressExist, getAddress } from "services";
+import { GetAddressResponse } from "types";
 
 import { BoxWrapper, Column, StyledTypography, Wrapper } from "./styles";
 

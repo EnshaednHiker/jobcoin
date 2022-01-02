@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "context";
 import { StyledLink } from "./StyledLink";
 import { StyledAccountCircleRoundedIcon, StyledTypography } from "./styles";
 

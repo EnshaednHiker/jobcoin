@@ -14,7 +14,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "./src",
+    "paths": {
+      "constants": ["./constants"],
+      "context": ["./context"],
+      "services": ["./services"],
+      "test-utils": ["./test-utils.tsx"],
+      "utilities": ["./utilities"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

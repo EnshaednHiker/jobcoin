@@ -13,13 +13,9 @@ import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
 import escapeHtml from "escape-html";
 
-import { AddressContext, DEFAULT_ADDRESS_VALUE } from "../../context";
-import {
-  doesAddressExist,
-  getAddress,
-  postSendCoinsToAddress,
-} from "../../services";
-import { hasEscapedCharacter, isNumberString } from "../../utilities";
+import { AddressContext, DEFAULT_ADDRESS_VALUE } from "context";
+import { doesAddressExist, getAddress, postSendCoinsToAddress } from "services";
+import { hasEscapedCharacter, isNumberString } from "utilities";
 
 import { StyledForm } from "./styles";
 

@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npm run clean && next dev",
     "build": "npm run clean && next build",
-    "clean": "rm -rf .next",
+    "clean": "rm -rf .next coverage",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage",

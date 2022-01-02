@@ -4,7 +4,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
 
-import { AddressContext } from "../../context";
+import { AddressContext } from "context";
 
 import { CustomSymbol } from "./CustomSymbol";
 import { HistoryChartWrapper, Wrapper } from "./styles";
