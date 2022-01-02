@@ -30,13 +30,13 @@ describe("SendCoinsForm", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render the form if an address is present", async () => {
+  it("should not render the form if an address is not present", async () => {
     const mockSetAddress = jest.fn() as never as Dispatch<
       SetStateAction<GetAddressResponse>
     >;
 
     const value = {
-      address: ADDRESS_WITH_FROM_ADDRESS,
+      address: DEFAULT_ADDRESS_VALUE,
       setAddress: mockSetAddress,
     };
 
@@ -48,8 +48,8 @@ describe("SendCoinsForm", () => {
     );
 
     expect(
-      await screen.findByTestId(SEND_COINS_FORM_TEST_IDS.FORM)
-    ).toBeInTheDocument();
+      screen.queryByTestId(SEND_COINS_FORM_TEST_IDS.FORM)
+    ).not.toBeInTheDocument();
   });
 
   describe("button states", () => {
