@@ -15,6 +15,14 @@ import { GetAddressResponse } from "types";
 
 import { BoxWrapper, Column, StyledTypography, Wrapper } from "./styles";
 
+const SCOPE = "@jobcoin/view/SendPage";
+
+export const SEND_PAGE_TEST_IDS = {
+  BALANCE_HEADING: `${SCOPE}/BalanceHeading`,
+  BALANCE_AMOUNT: `${SCOPE}/BalanceAmount`,
+  SEND_COINS_HEADING: `${SCOPE}/SendCoinsHeading`,
+} as const;
+
 export const SendPage: NextPage<GetAddressResponse> = (props) => {
   const { address, setAddress } = useContext(AddressContext);
   const { query } = useRouter();
@@ -30,8 +38,8 @@ export const SendPage: NextPage<GetAddressResponse> = (props) => {
         transactions,
       });
     } else if (
-      (!doesAddressExist({ balance, transactions }) && addressName?.length) ??
-      0 > 0
+      !doesAddressExist({ balance, transactions }) &&
+      (addressName?.length ?? 0) > 0
     ) {
       const fetchAddress = async () =>
         await getAddress(escapeHtml(addressName?.trim()));
@@ -60,6 +68,7 @@ export const SendPage: NextPage<GetAddressResponse> = (props) => {
             <StyledTypography
               // @ts-ignore issue with emotion not picking up the component prop
               component="h2"
+              data-testid={SEND_PAGE_TEST_IDS.BALANCE_HEADING}
               textAlign="center"
               variant="h5"
             >
@@ -67,6 +76,7 @@ export const SendPage: NextPage<GetAddressResponse> = (props) => {
             </StyledTypography>
             <Typography
               component="p"
+              data-testid={SEND_PAGE_TEST_IDS.BALANCE_AMOUNT}
               textAlign="center"
               sx={{ m: "3.4375rem" }}
               variant="h5"
@@ -78,6 +88,7 @@ export const SendPage: NextPage<GetAddressResponse> = (props) => {
             <StyledTypography
               // @ts-ignore issue with emotion not picking up the component prop
               component="h2"
+              data-testid={SEND_PAGE_TEST_IDS.SEND_COINS_HEADING}
               textAlign="center"
               variant="h5"
             >
