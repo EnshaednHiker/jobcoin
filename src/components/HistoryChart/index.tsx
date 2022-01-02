@@ -12,7 +12,7 @@ import { HistoryChartWrapper, Wrapper } from "./styles";
 const SCOPE = "@jobcoin/components/HistoryChart";
 
 export const HISTORY_CHART_TEST_IDS = {
-  CHART: `${SCOPE}/CHART`,
+  CHART: `${SCOPE}/Chart`,
 } as const;
 
 export const HistoryChart: FC = () => {
