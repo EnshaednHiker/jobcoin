@@ -4,6 +4,6 @@ export const hasEscapedCharacter = (textString: string) => {
 };
 
 export const isNumberString = (textString: string) => {
-  const regex = /([0-9])/g;
+  const regex = /^-?\d*\.?\d*$/;
   return regex.test(textString);
 };
