@@ -15,7 +15,7 @@ import { GetAddressResponse } from "types";
 
 import { BoxWrapper, Column, StyledTypography, Wrapper } from "./styles";
 
-const SCOPE = "@jobcoin/view/SendPage";
+const SCOPE = "@jobcoin/views/SendPage";
 
 export const SEND_PAGE_TEST_IDS = {
   BALANCE_HEADING: `${SCOPE}/BalanceHeading`,
