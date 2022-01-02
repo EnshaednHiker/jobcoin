@@ -151,7 +151,7 @@ export const SendCoinsForm: FC = () => {
         onKeyPress={onKeypressHandler}
         required
         size="small"
-        sx={{ mt: "24px" }}
+        sx={{ mt: "1.5rem" }}
         value={amountToSend}
         variant="outlined"
       />
@@ -159,7 +159,7 @@ export const SendCoinsForm: FC = () => {
         disabled={isDisabled}
         fullWidth
         onClick={sendJobcoinsOnClickHandler}
-        sx={{ mt: "24px" }}
+        sx={{ mt: "1.5rem" }}
         variant="contained"
       >
         Send Jobcoins

@@ -12,6 +12,12 @@ import { StyledLink } from "./StyledLink";
 import { StyledAccountCircleRoundedIcon, StyledTypography } from "./styles";
 
 const MOBILE_BREAKPOINT = "31.25rem";
+
+const SCOPE = "@jobcoin/components/NavigationBar";
+
+export const NAVIGATION_BAR_TEST_IDS = {
+  SIGN_OUT_BUTTON: `${SCOPE}/SignOutButton`,
+} as const;
 export const NavigationBar: FC = () => {
   const router = useRouter();
   const value = useContext(AddressContext);
@@ -55,7 +61,11 @@ export const NavigationBar: FC = () => {
             Signed in
           </StyledTypography>
 
-          <Button color="inherit" onClick={handleLogoutClick}>
+          <Button
+            color="inherit"
+            data-testid={NAVIGATION_BAR_TEST_IDS.SIGN_OUT_BUTTON}
+            onClick={handleLogoutClick}
+          >
             Logout
           </Button>
         </Toolbar>

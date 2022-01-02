@@ -68,7 +68,7 @@ export const SendPage: NextPage<GetAddressResponse> = (props) => {
             <Typography
               component="p"
               textAlign="center"
-              sx={{ m: "55px" }}
+              sx={{ m: "3.4375rem" }}
               variant="h5"
             >
               {address.balance ?? "0"}
